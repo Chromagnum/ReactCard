@@ -1,5 +1,7 @@
 import "./scss/Card.scss";
 import icon from "./svg/icon.svg";
+import rhombus from "./svg/rhombus-red.svg";
+import InputSet from "./Input";
 
 import { Formik, Form, Field } from "formik";
 
@@ -15,7 +17,7 @@ function Card() {
                     <span>Nation</span>
                 </div>
 
-                <span className="business">Invasions</span>
+                <span className="business">We do Invasions</span>
             </div>
 
             <Formik initialValues={{ }} onSubmit={(values, { setSubmitting }) => {
@@ -23,10 +25,10 @@ function Card() {
                 setSubmitting(false);
             }}>
                 <Form>
-                    <fieldset className="card-section" id="personal">
-                        <Field type="text" name="name"/>
-                        <Field type="text" name="occupation"/>
-                    </fieldset>
+                    <InputSet id="personal" icon={rhombus} inputs={[
+                        { "type": "text", "name": "name" },
+                        { "type": "text", "name": "occupation" }
+                    ]}/>
 
                     <fieldset className="card-section" id="cellular">
                         <Field type="text" name="phonenumber"/>
