@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50">
-    <polygon points="0,0 0,50 50,50 35,0" fill="#292929"/>
-    <polygon points="35,0 50,50 55,50 40,0" fill="#cbd0d2"/>
+    <polygon points="35,0 50,50 55,50 40,0" fill="#cbd0d2"/> <!-- Stripe -->
+    <polygon points="0,8.55 0,14.55 100,14.55 100,8.55" fill="#dc143c"/> <!-- First Rhombus -->
+    <polygon points="0,18.55 0,24.55 100,24.55 100,18.55" fill="#dc143c"/> <!-- Second Rhombus + 100px -->
+    <polygon points="0,26.15 0,32.15 100,32.15 100,26.15" fill="#dc143c"/> <!-- Third Rhombus + 76px -->
+    <polygon points="0,33.75 0,39.75 100,39.75 100,33.75" fill="#dc143c"/> <!-- Fourth Rhombus + 76px -->
+    <polygon points="0,0 0,50 50,50 35,0" fill="#292929"/> <!-- Dark grey Area -->
+    <polygon points="40,0 55,50 100,50 100,0" fill="#ffffff"/> <!-- White background -->
 </svg>
