@@ -1,10 +1,11 @@
 import './scss/App.scss';
+import icon from "./svg/icon.svg";
 import Card from "./Card";
 
 function App() {
     return (
         <div className="App">
-            <Card />
+            <Card name="Fire Nation" motto="We do Invasions" logo={icon}/>
         </div>
     );
 }

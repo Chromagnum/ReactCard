@@ -1,22 +1,21 @@
 import "./scss/Card.scss";
-import icon from "./svg/icon.svg";
 import InputSet from "./Input";
 
 import { Formik, Form } from "formik";
 
-function Card() {
+function Card(props: { name: string, motto: string, logo: string}) {
     return (
         <div className="business-card">
             <div className="logo">
-                <img src={icon} alt="Logo"/>
+                <img src={props.logo} alt="Logo"/>
 
                 <div className="business-name">
-                    <span>Fire</span>
+                    <span>{props.name.split(" ")[0]}</span>
                     <span>&nbsp;</span>
-                    <span>Nation</span>
+                    <span>{props.name.split(" ")[1]}</span>
                 </div>
 
-                <span className="business">We do Invasions</span>
+                <span className="business">{props.motto}</span>
             </div>
 
             <Formik initialValues={{ }} onSubmit={(values, { setSubmitting }) => {
