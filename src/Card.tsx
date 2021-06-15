@@ -1,11 +1,16 @@
-import "./scss/Card.scss";
+import "./scss/Card-v1.scss";
+import "./scss/Card-v2.scss";
 import InputSet from "./Input";
+
+import neticon from "./svg/internet-icon.svg";
+import phoneicon from "./svg/phone-icon.svg";
+import homeicon from "./svg/home-icon.svg";
 
 import { Formik, Form } from "formik";
 
-function Card(props: { name: string, motto: string, logo: string}) {
+function Card(props: { name: string, motto: string, logo: string, v: string}) {
     return (
-        <div className="business-card">
+        <div className={"business-card-" + props.v}>
             <div className="logo">
                 <img src={props.logo} alt="Logo"/>
 
@@ -28,17 +33,17 @@ function Card(props: { name: string, motto: string, logo: string}) {
                         { "type": "text", "name": "jobtitle" }
                     ]}/>
 
-                    <InputSet id="cellular" icon="" inputs={[
+                    <InputSet id="cellular" icon={phoneicon} inputs={[
                         { "type": "text", "name": "phonenumber"},
                         { "type": "text", "name": "altphonenumber"}
                     ]}/>
 
-                    <InputSet id="emails" icon="" inputs={[
+                    <InputSet id="emails" icon={neticon} inputs={[
                         { "type": "email", "name": "personalemail"},
                         { "type": "email", "name": "businessemail"}
                     ]}/>
 
-                    <InputSet id="address" icon="" inputs={[
+                    <InputSet id="address" icon={homeicon} inputs={[
                         { "type": "text", "name": "address"},
                         { "type": "text", "name": "mailing"}
                     ]}/>

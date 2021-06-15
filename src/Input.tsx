@@ -1,4 +1,3 @@
-import "./scss/InputSet.scss";
 import { Field } from "formik";
 
 function InputSet(props: {id: string, icon: any, inputs: {type: string, name: string}[]}) {
@@ -9,7 +8,9 @@ function InputSet(props: {id: string, icon: any, inputs: {type: string, name: st
             </div>
 
             <div className="inputs">
-                {props.inputs.map((input) => <Field type={input.type} name={input.name}/>)}
+                <Field type={props.inputs[0].type} name={props.inputs[0].name}/>
+                <Field type={props.inputs[1].type} name={props.inputs[1].name}/>
+                {/* {props.inputs.map((input) => <Field type={input.type} name={input.name}/>)} */}
             </div>
         </fieldset>
     );
