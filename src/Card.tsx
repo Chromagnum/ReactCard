@@ -11,7 +11,15 @@ import { Formik, Form } from "formik";
 
 function Card(props: { name: string, motto: string, logo: string, v: string}) {
     return (
-        <div className={"business-card-" + props.v}>
+        <div className={"business-card-" + props.v} onClick={function(event) {
+            /** @ts-ignore */
+            let e: HTMLElement = event.target;
+            while (!e.classList.contains("business-card-v2"))
+                e = (e.parentElement as HTMLElement);
+
+            e.onanimationend = () => e.classList.remove("flip");
+            e.classList.add("flip");
+        }}>
             <div className="logo">
                 <img src={props.logo} alt="Logo"/>
 

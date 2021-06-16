@@ -1,12 +1,15 @@
 @use "variables.scss";
 
 .business-card-v2 {
-    width: variables.$width;
-    height: variables.$height;
+    min-width: variables.$minwidth;
+    min-height: variables.$minheight;
+    width: variables.$widthxl;
+    height: variables.$heightxl;
     border-radius: 8px;
     background-image: url("../svg/background-v2.svg");
     background-size: cover;
     background-repeat: no-repeat;
+    transition: transform 205ms ease-out;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -91,6 +94,7 @@
 
             input {
                 font-family: "Montserrat";
+                font-size: 1.4vh;
                 font-weight: 500;
                 text-transform: uppercase;
             }
@@ -139,5 +143,49 @@
         input:focus {
             outline: none;
         }
+    }
+}
+
+.flip {
+    animation: flip 500ms ease-out;
+}
+
+@keyframes flip {
+    50% {
+        transform: rotateY(90deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+@media screen and (min-width: 0px) {
+    .business-card-v2 {
+        transform: scale(0.125);
+    }
+}
+
+@media screen and (min-width: variables.$sm) {
+    .business-card-v2 {
+        transform: scale(0.25);
+    }
+}
+
+@media screen and (min-width: variables.$md) {
+    .business-card-v2 {
+        transform: scale(0.5);
+    }
+}
+
+@media screen and (min-width: variables.$lg) {
+    .business-card-v2 {
+        transform: none;
+    }
+}
+
+@media screen and (min-width: variables.$xl) {
+    .business-card-v2 {
+        // transform: scale();
     }
 }

@@ -1,8 +1,8 @@
 @use "variables.scss";
 
 .business-card-v1 {
-    width: variables.$width;
-    height: variables.$height;
+    width: variables.$widthxl;
+    height: variables.$heightxl;
     background-image: url("../svg/background.svg");
     background-size: cover;
     background-repeat: no-repeat;
