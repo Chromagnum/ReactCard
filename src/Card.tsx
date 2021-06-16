@@ -1,6 +1,7 @@
 import "./scss/Card-v1.scss";
 import "./scss/Card-v2.scss";
 import InputSet from "./Input";
+import NameInput from "./NameInput";
 
 import neticon from "./svg/internet-icon.svg";
 import phoneicon from "./svg/phone-icon.svg";
@@ -23,15 +24,22 @@ function Card(props: { name: string, motto: string, logo: string, v: string}) {
                 <span className="business">{props.motto}</span>
             </div>
 
-            <Formik initialValues={{ }} onSubmit={(values, { setSubmitting }) => {
+            <Formik initialValues={{
+                "firstname": "Alvaro",
+                "lastname": "Hulse",
+                "jobtitle": "Fullstack Developer",
+                "phonenumber": "+501 000-0000",
+                "altphonenumber": "+501 000-0001",
+                "personalemail": "alvaro.hulsehabet@gmail.com",
+                "businessemail": "alvaro.businessname@gmail.com",
+                "address": "4 Elements Street",
+                "mailing": "Some P.O. Box"
+            }} onSubmit={(values, { setSubmitting }) => {
                 console.log(values);
                 setSubmitting(false);
             }}>
                 <Form>
-                    <InputSet id="personal" icon="" inputs={[
-                        { "type": "text", "name": "name" },
-                        { "type": "text", "name": "jobtitle" }
-                    ]}/>
+                    <NameInput/>
 
                     <InputSet id="cellular" icon={phoneicon} inputs={[
                         { "type": "text", "name": "phonenumber"},

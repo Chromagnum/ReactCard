@@ -28,7 +28,7 @@
             font-size: 16px;
 
             span:first-child {
-                color: variables.$logoColor;
+                color: variables.$primaryColor;
             }
 
             span:last-child {
@@ -49,7 +49,7 @@
     }
 
     form {
-        border: 1px solid variables.$background-color;
+        border: 1px solid variables.$accentColor;
         border-left-width: 0;
         display: flex;
         flex-direction: column;
