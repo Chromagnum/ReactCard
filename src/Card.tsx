@@ -6,20 +6,17 @@ import NameInput from "./NameInput";
 import neticon from "./svg/internet-icon.svg";
 import phoneicon from "./svg/phone-icon.svg";
 import homeicon from "./svg/home-icon.svg";
+import flipicon from "./svg/flip-icon.svg";
 
 import { Formik, Form } from "formik";
 
 function Card(props: { name: string, motto: string, logo: string, v: string}) {
     return (
-        <div className={"business-card-" + props.v} onClick={function(event) {
-            /** @ts-ignore */
-            let e: HTMLElement = event.target;
-            while (!e.classList.contains("business-card-v2"))
-                e = (e.parentElement as HTMLElement);
+        <div className={"business-card-" + props.v}>
+            <button className="flip">
+                <img src={flipicon} alt="flip"/>
+            </button>
 
-            e.onanimationend = () => e.classList.remove("flip");
-            e.classList.add("flip");
-        }}>
             <div className="logo">
                 <img src={props.logo} alt="Logo"/>
 
