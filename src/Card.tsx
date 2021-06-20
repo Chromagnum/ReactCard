@@ -19,6 +19,12 @@ function validatePhone(phone: string) {
     return phoneRegex.test(phone);
 }
 
+function getParentByClassName(el: HTMLElement, className: string) {
+    while (el !== null && !el.classList.contains(className))
+        el = el.parentElement as HTMLElement;
+    return el;
+}
+
 function Card(props: { name: string, motto: string, logo: string}) {
     return (
         <Formik validateOnChange={true} initialValues={{
@@ -80,34 +86,91 @@ function Card(props: { name: string, motto: string, logo: string}) {
             return errors;
         }}>
             <Form className="business-card">
-                <button className="flip" type="button" onClick={function(event) {
-                    let element: HTMLElement = event.nativeEvent.target as HTMLElement;
-                    while (element.className !== "business-card")
+                {/* 
+                let element = event.target as HTMLElement, button: HTMLButtonElement = event.target as HTMLButtonElement;
+
+                    while (!element.classList.contains("business-card"))
                         element = element.parentElement as HTMLElement;
+                    while (!button.classList.contains("flip"))
+                        button = button.parentElement as HTMLButtonElement;
 
                     let front = element.children[2],
                         back = element.children[1];
                     
-                    if (back.classList.toggle("invisible")) {
-                        back.classList.remove("visible");
-                        front.classList.add("visible");
-                        front.classList.remove("invisible");
-                    }
+                    if (side === "front") {
+                        setSide("back");
 
-                    else {
-                        back.classList.add("visible");
-                        front.classList.remove("visible");
                         front.classList.add("invisible");
+                        button.disabled = true;
+
+                        front.addEventListener("transitionend", () => {
+                            front.classList.remove("visible");
+                            back.classList.add("visble");
+                            back.classList.remove("invisible");
+
+                            button.disabled = false;
+                        }, {once: true});
                     }
-                }}>
-                    <img src={flipicon} alt="flip"/>
-                </button>
-                
-                <div className="back-side invisible">
 
-                </div>
+                    else if (side === "back") {
+                        setSide("front");
 
-                <div className="front-side deinvisify">
+                        back.classList.add("invisible");
+                        button.disabled = true;
+
+                        back.addEventListener("transitionend", () => {
+                            back.classList.remove("visible");
+                            front.classList.add("visible");
+                            front.classList.remove("invisible");
+
+                            button.disabled = false;
+                        }, {once: true});
+                    }
+
+                    console.log(side);
+                */}
+
+                <fieldset id="back" className="back-side invisible">
+                    <button className="flip" type="button" onClick={(event) => {
+                        let button: HTMLButtonElement = getParentByClassName(event.target as HTMLElement, "flip") as HTMLButtonElement,
+                            [back, front] = getParentByClassName(button, "business-card").children;
+
+                        back.classList.add("invisible");
+                        button.setAttribute("disabled", "true");
+                        back.setAttribute("disabled", "true");
+
+                        back.addEventListener("transitionend", () => {
+                            back.classList.remove("visible");
+                            front.classList.add("visible");
+                            front.classList.remove("invisible");
+
+                            front.removeAttribute("disabled");
+                            (front.firstElementChild as HTMLButtonElement).removeAttribute("disabled");
+                        }, {once: true});
+                    }}>
+                        <img src={flipicon} alt="flip"/>
+                    </button>
+                </fieldset>
+
+                <fieldset id="front" className="front-side visible">
+                    <button className="flip" type="button" onClick={(event) => {
+                        let button: HTMLButtonElement = getParentByClassName(event.target as HTMLElement, "flip") as HTMLButtonElement,
+                            [back, front] = getParentByClassName(button, "business-card").children;
+
+                        front.classList.add("invisible");
+                        front.setAttribute("disabled", "true");
+
+                        front.addEventListener("transitionend", () => {
+                            front.classList.remove("visible");
+                            back.classList.add("visible");
+                            back.classList.remove("invisible");
+
+                            back.removeAttribute("disabled");
+                        }, {once: true});
+                    }}>
+                        <img src={flipicon} alt="flip"/>
+                    </button>
+
                     <div className="logo">
                         <img src={props.logo} alt="Logo"/>
 
@@ -155,8 +218,7 @@ function Card(props: { name: string, motto: string, logo: string}) {
 
                         <button className="submit" type="submit">Complete</button>
                     </div>
-                </div>
-                
+                </fieldset>
             </Form>
         </Formik>
     );

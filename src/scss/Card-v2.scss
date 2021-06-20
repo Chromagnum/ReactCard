@@ -8,6 +8,19 @@
     height: variables.$heightxl;
     position: relative;
     overflow: hidden;
+}
+
+.front-side, .back-side {
+    width: 100%;
+    height: 100%;
+    border: 1px solid variables.$accentColor;
+    border-radius: calc(0.5 * var(--font-size));
+    background-color: variables.$accentColor;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: transform 250ms ease-in-out;
+    position: absolute;
+    top: 0; left: 0;
     
     .flip {
         width: calc(2 * var(--font-size));
@@ -24,31 +37,14 @@
     }
 }
 
-.invisible {
-    animation: invisify 250ms forwards;
-}
-
-.visible {
-    animation: deinvisify 250ms forwards;
-}
+.visible { transform: rotateX(0deg); }
+.invisible { transform: rotateX(90deg); }
 
 .business-card .front-side {
-    width: 100%;
-    height: 100%;
-    border-radius: calc(0.5 * var(--font-size));
-    background-image: url("../svg/background-v2.svg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 0; left: 0;
+    background-image: url("../svg/front-background.svg");
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    border: 1px solid variables.$accentColor;
-    background-color: variables.$accentColor;
-
-    
 
     .error-message {
         width: 100%;
@@ -99,7 +95,7 @@
             color: white;
         }
 
-        .business-name, .business {
+        .business-name input, .business {
             font-family: "Montserrat";
             font-weight: 500;
         }
@@ -238,31 +234,7 @@
 }
 
 .business-card .back-side {
-    width: 100%;
-    height: 100%;
-    background-image: url("../svg/background-v2.svg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-@keyframes invisify {
-    from {
-        transform: rotateX(0deg);
-    }
-
-    to {
-        transform: rotateX(90deg);
-    }
-}
-
-@keyframes deinvisify {
-    from {
-        transform: rotateX(90deg);
-    }
-
-    to {
-        transform: rotateX(0deg);
-    }
+    background-image: url("../svg/back-background.svg");
 }
 
 @media screen and (min-width: 0px) {

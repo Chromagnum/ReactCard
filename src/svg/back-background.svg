@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50">
+    <polygon points="0,49.5 0,50 0.5,50 3.328,47.172 5.5,50 6.5,50 3.828,46.672 50,0 49,0" fill="#292929"/> <!-- Grey Stripe -->
+    <polygon points="0.5,50 3.328,47.172 5.5,50" fill="#dc143c"/> <!-- Red triangle -->
+    <polygon points="6.5,50 3.828,46.672 50,0 50.5,0 4.328,46.672 7,50" fill="#dc143c"/>
+    <polygon points="7,50 4.328,46.672 50.5,0 100,0 100,50" fill="#222c38"/>
+</svg>
