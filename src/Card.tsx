@@ -6,8 +6,9 @@ import neticon from "./svg/internet-icon.svg";
 import phoneicon from "./svg/phone-icon.svg";
 import homeicon from "./svg/home-icon.svg";
 import flipicon from "./svg/flip-icon.svg";
+import github from "./svg/Github.svg";
 
-import { Formik, Form, Field, ErrorMessage, FormikErrors } from "formik";
+import { Formik, Form, Field, ErrorMessage, FormikErrors, FormikValues } from "formik";
 
 const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 function validateEmail(email: string) {
@@ -25,21 +26,9 @@ function getParentByClassName(el: HTMLElement, className: string) {
     return el;
 }
 
-function Card(props: { name: string, motto: string, logo: string}) {
+function Card(props: { logo: string, initialValues: FormikValues }) {
     return (
-        <Formik validateOnChange={true} initialValues={{
-            "businessname": "Fire Nation",
-            "business": "We do Invasions",
-            "firstname": "Alvaro",
-            "lastname": "Hulse",
-            "jobtitle": "Fullstack Developer",
-            "phonenumber": "+501 000-0000",
-            "altphonenumber": "+501 000-0001",
-            "personalemail": "alvaro.hulsehabet@gmail.com",
-            "businessemail": "alvaro.businessname@gmail.com",
-            "address": "4 Elements Street",
-            "mailing": "Some P.O. Box"
-        }} onSubmit={(values, actions) => {
+        <Formik validateOnChange={true} initialValues={props.initialValues} onSubmit={(values, actions) => {
             console.log(values);
             actions.setSubmitting(false);
         }} validate={(values) => {
@@ -52,9 +41,9 @@ function Card(props: { name: string, motto: string, logo: string}) {
             if (!values.business)
                 errors.business = "Required";
             if (!values.firstname)
-                errors.firstname = "Required";
+                errors.firstname = "First name required";
             if (!values.lastname)
-                errors.lastname = "Required";
+                errors.lastname = "Last name required";
             if (!values.jobtitle)
                 errors.jobtitle = "Required";
             if (!values.phonenumber)
@@ -69,6 +58,8 @@ function Card(props: { name: string, motto: string, logo: string}) {
                 errors.address = "Required";
             if (!values.mailing)
                 errors.mailing = "Required";
+            if (!values.github)
+                errors.github = "Required";
 
             // Validate email patterns
             if (!validateEmail(values.personalemail))
@@ -86,51 +77,7 @@ function Card(props: { name: string, motto: string, logo: string}) {
             return errors;
         }}>
             <Form className="business-card">
-                {/* 
-                let element = event.target as HTMLElement, button: HTMLButtonElement = event.target as HTMLButtonElement;
-
-                    while (!element.classList.contains("business-card"))
-                        element = element.parentElement as HTMLElement;
-                    while (!button.classList.contains("flip"))
-                        button = button.parentElement as HTMLButtonElement;
-
-                    let front = element.children[2],
-                        back = element.children[1];
-                    
-                    if (side === "front") {
-                        setSide("back");
-
-                        front.classList.add("invisible");
-                        button.disabled = true;
-
-                        front.addEventListener("transitionend", () => {
-                            front.classList.remove("visible");
-                            back.classList.add("visble");
-                            back.classList.remove("invisible");
-
-                            button.disabled = false;
-                        }, {once: true});
-                    }
-
-                    else if (side === "back") {
-                        setSide("front");
-
-                        back.classList.add("invisible");
-                        button.disabled = true;
-
-                        back.addEventListener("transitionend", () => {
-                            back.classList.remove("visible");
-                            front.classList.add("visible");
-                            front.classList.remove("invisible");
-
-                            button.disabled = false;
-                        }, {once: true});
-                    }
-
-                    console.log(side);
-                */}
-
-                <fieldset id="back" className="back-side invisible">
+                <fieldset id="back" className="back-side visible">
                     <button className="flip" type="button" onClick={(event) => {
                         let button: HTMLButtonElement = getParentByClassName(event.target as HTMLElement, "flip") as HTMLButtonElement,
                             [back, front] = getParentByClassName(button, "business-card").children;
@@ -150,9 +97,17 @@ function Card(props: { name: string, motto: string, logo: string}) {
                     }}>
                         <img src={flipicon} alt="flip"/>
                     </button>
+                
+                    <div className="content">
+                        <img src={github} alt={github}/>
+                        <div className="caption">Your Github</div>
+
+                        <Field type="text" name="github" placeholder="Github"/>
+                        <ErrorMessage name="github" render={(msg) => <div className="error-message">{msg}</div>}/>
+                    </div>
                 </fieldset>
 
-                <fieldset id="front" className="front-side visible">
+                <fieldset id="front" className="front-side invisible">
                     <button className="flip" type="button" onClick={(event) => {
                         let button: HTMLButtonElement = getParentByClassName(event.target as HTMLElement, "flip") as HTMLButtonElement,
                             [back, front] = getParentByClassName(button, "business-card").children;

@@ -18,9 +18,11 @@
     background-color: variables.$accentColor;
     background-size: cover;
     background-repeat: no-repeat;
-    transition: transform 250ms ease-in-out;
+    transition: transform 125ms ease-out;
     position: absolute;
     top: 0; left: 0;
+    display: flex;
+    flex-direction: row;
     
     .flip {
         width: calc(2 * var(--font-size));
@@ -35,6 +37,16 @@
             cursor: pointer;
         }
     }
+    
+    .error-message {
+        width: 100%;
+        font-size: calc(0.75 * var(--font-size));
+        color: red;
+    }
+
+    input:focus {
+        outline: none;
+    }
 }
 
 .visible { transform: rotateX(0deg); }
@@ -42,15 +54,7 @@
 
 .business-card .front-side {
     background-image: url("../svg/front-background.svg");
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
-
-    .error-message {
-        width: 100%;
-        font-size: calc(0.75 * var(--font-size));
-        color: red;
-    }
 
     .logo {
         width: 30%;
@@ -67,10 +71,6 @@
         img {
             width: calc(6 * var(--font-size));
             height: calc(6 * var(--font-size));
-        }
-
-        input:focus {
-            outline: none;
         }
 
         .business-name {
@@ -235,6 +235,42 @@
 
 .business-card .back-side {
     background-image: url("../svg/back-background.svg");
+    justify-content: flex-end;
+
+    .content {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: calc(6 * var(--font-size));
+            height: calc(6 * var(--font-size));
+            margin-bottom: calc(0.5 * var(--font-size));
+        }
+
+        .caption {
+            font-family: "Montserrat";
+            color: white;
+            margin-bottom: var(--font-size);
+        }
+
+        input {
+            width: 100%;
+            background-color: transparent;
+            font-family: "Montserrat";
+            font-size: calc(0.75 * var(--font-size));
+            text-align: center;
+            color: white;
+        }
+
+        .error-message {
+            width: 100%;
+            text-align: center;
+        }
+    }
 }
 
 @media screen and (min-width: 0px) {
