@@ -204,7 +204,7 @@ $primaryColor: #dc143c;
                     flex-direction: column;
 
                     input {
-                        height: calc(0.04 * calc(--height));
+                        height: calc(0.04 * var(--height));
                         font-family: "Montserrat";
                         font-size: calc(0.03 * var(--height));
                         font-weight: 500;
