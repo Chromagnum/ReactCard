@@ -20,6 +20,11 @@ function validatePhone(phone: string) {
     return phoneRegex.test(phone);
 }
 
+const urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/i;
+function validateUrl(url: string) {
+    return urlRegex.test(url);
+}
+
 function getParentByClassName(el: HTMLElement, className: string) {
     while (el !== null && !el.classList.contains(className))
         el = el.parentElement as HTMLElement;
@@ -32,7 +37,6 @@ function Card(props: { logo: string, initialValues: FormikValues }) {
             console.log(values);
             actions.setSubmitting(false);
         }} validate={(values) => {
-            console.log(values);
             var errors: FormikErrors<typeof values> = {};
 
             // Check if all properties are present
@@ -62,17 +66,20 @@ function Card(props: { logo: string, initialValues: FormikValues }) {
                 errors.github = "Required";
 
             // Validate email patterns
-            if (!validateEmail(values.personalemail))
+            if (!errors.personalemail && !validateEmail(values.personalemail))
                 errors.personalemail = "Invalid Email Address";
-            if (!validateEmail(values.businessemail))
+            if (!errors.businessemail && !validateEmail(values.businessemail))
                 errors.businessemail = "Invalid Email Address";
 
             // Validate phone number patterns
-            if (!validatePhone(values.phonenumber))
+            if (!errors.phonenumber && !validatePhone(values.phonenumber))
                 errors.phonenumber = "Invalid Phone Number";
-            if (!validatePhone(values.altphonenumber))
+            if (!errors.altphonenumber && !validatePhone(values.altphonenumber))
                 errors.altphonenumber = "Invalid Phone Number";
-            console.log(errors);
+            
+            // Validate the github url
+            if (!errors.github && !validateUrl(values.github))
+                errors.github = "Invalid URL";
 
             return errors;
         }}>
