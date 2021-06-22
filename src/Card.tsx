@@ -1,5 +1,4 @@
-import "./scss/Card-v1.scss";
-import "./scss/Card-v2.scss";
+import "./scss/Card.scss";
 import InputSet from "./InputSet";
 
 import neticon from "./svg/internet-icon.svg";
